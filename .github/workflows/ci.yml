@@ -30,7 +30,7 @@ jobs:
 
       - name: Set enviroment
         if: github.ref == 'refs/heads/dev'
-        run: "cd ./enviroment/dev"
+        run: "cd ./enviroments/dev"
 
       - name: Run terraform init
         run: terraform init
