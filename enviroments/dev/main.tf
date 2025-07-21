@@ -1,12 +1,19 @@
+locals {
+  common_tags = {
+    IAC         = "True"
+    Environment = var.enviroment
+  }
+}
+
 ##bucket
 module "terraform_backend" {
   source        = "../../modules/storage/aws/s3"
   bucket        = "bucket.terraform.state"
   force_destroy = true
   region        = var.aws_region
-  tags = {
-    "IAC" = "True"
-  }
+  tags = merge(
+    local.common_tags
+  )
 }
 
 #auth
@@ -78,7 +85,15 @@ resource "aws_iam_role_policy" "terraform_policies" {
 module "container_registry" {
   source = "../../modules/container.registry/aws/ecr"
   name   = "${var.service_name}.container.registry.${var.enviroment}"
-  tags = {
-    "IAC" = "True"
-  }
+  tags = merge(
+    local.common_tags
+  )
+}
+
+module "container_registry_2" {
+  source = "../../modules/container.registry/aws/ecr"
+  name   = "${var.service_name}.container.registry.${var.enviroment}-2"
+  tags = merge(
+    local.common_tags
+  )
 }
