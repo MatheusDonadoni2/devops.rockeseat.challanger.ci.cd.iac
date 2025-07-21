@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - dese
+
+jobs:
+  checkout:
+    name: "Checkout"
+    runs-on: ubuntun-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+  checkout-2:
+    name: "Checkout"
+    runs-on: ubuntun-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
