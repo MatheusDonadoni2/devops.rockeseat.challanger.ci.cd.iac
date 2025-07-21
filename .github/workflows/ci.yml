@@ -28,18 +28,15 @@ jobs:
         with:
           terraform_version: 1.8.4
 
-      - name: Set enviroment
-        if: github.ref == 'refs/heads/dev'
-        run: "cd ./enviroments/dev"
-
       - name: Run terraform init
-        run: terraform init
+        if: github.ref == 'refs/heads/dev'
+        run: cd ./enviroments/dev && terraform init
 
       - name: Run terraform format
-        run: terraform fmt -check
+        run: cd ./enviroments/dev && terraform fmt -check
 
       # - name: Run terraform plan
       #   run: terraform plan
 
       - name: Run terraform apply
-        run: terraform apply -auto-approve
+        run: cd ./enviroments/dev && terraform apply -auto-approve
