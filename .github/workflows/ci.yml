@@ -4,14 +4,23 @@ on:
   push:
     branches:
       - dev
+      - staging
+      - prod
 
 permissions:
   id-token: write
 
 jobs:
   run-terraform:
-    name: "Run terraform"
+    name: Deploy Terraform
     runs-on: ubuntu-latest
+
+    env:
+      TF_ENV: ${{ github.ref_name }}
+
+    defaults:
+      run:
+        working-directory: environments/${{ github.ref_name }}
 
     steps:
       - name: checkout
@@ -20,8 +29,8 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: "arn:aws:iam::529928147423:role/terraform.role"
-          aws-region: "us-east-2"
+          role-to-assume: "${{ secrets.ROLE_ASSUME }}/terraform.role"
+          aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Setup terraform
         uses: hashicorp/setup-terraform@v3
@@ -30,13 +39,13 @@ jobs:
 
       - name: Run terraform init
         if: github.ref == 'refs/heads/dev'
-        run: cd ./enviroments/dev && terraform init
+        run: terraform init
 
       - name: Run terraform format
-        run: cd ./enviroments/dev && terraform fmt -check
+        run: terraform fmt -check
 
-      # - name: Run terraform plan
-      #   run: terraform plan
+      - name: Run terraform plan
+        run: terraform plan
 
       - name: Run terraform apply
-        run: cd ./enviroments/dev && terraform apply -auto-approve
+        run: terraform apply -auto-approve
