@@ -1,6 +1,19 @@
-module "aws_s3_bucket_backend" {
-  source        = "../../modules/storage/s3"
-  bucket        = "${var.service_name}.terraform.state"
+##bucket
+module "terraform_backend" {
+  source        = "../../modules/storage/aws/s3"
+  bucket        = "bucket.terraform.state"
   force_destroy = true
-  region        =  var.aws_region
+  region        = var.aws_region
+  tags = {
+    "IAC" = "True"
+  }
+}
+
+#container registry
+module "container_registry" {
+  source = "../../modules/container.registry/aws/ecr"
+  name = "${var.service_name}.container.registry.${var.enviroment}"
+  tags = {
+    "IAC" = "True"
+  }  
 }

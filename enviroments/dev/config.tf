@@ -7,8 +7,8 @@ terraform {
   }
 
   backend "s3" {
-    bucket = "challenger.rocketseat.ci.cd.terraform.state"
-    key    = "state/terraform.tfstate"
+    bucket = "bucket.terraform.state"
+    key    = "challenger.rocketseat.ci.cd/dev/terraform.tfstate"
     region = "us-east-2"
   }
 }
