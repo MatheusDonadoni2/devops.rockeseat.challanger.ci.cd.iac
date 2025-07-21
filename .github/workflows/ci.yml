@@ -7,8 +7,8 @@ on:
 
 jobs:
   run-terraform:
-    name: "Run Terraform"
-    runs-on: ubuntun-latest
+    name: "Run terraform"
+    runs-on: ubuntu-latest
 
     steps:
       - name: checkout
