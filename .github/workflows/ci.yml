@@ -20,7 +20,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: environments/${{ github.ref_name }}
+        working-directory: ./environments/${{ github.ref_name }}
 
     steps:
       - name: checkout
@@ -38,7 +38,6 @@ jobs:
           terraform_version: 1.8.4
 
       - name: Run terraform init
-        if: github.ref == 'refs/heads/dev'
         run: terraform init
 
       - name: Run terraform format
