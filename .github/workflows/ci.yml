@@ -5,6 +5,9 @@ on:
     branches:
       - dev
 
+permissions:
+  id-token: write
+
 jobs:
   run-terraform:
     name: "Run terraform"
