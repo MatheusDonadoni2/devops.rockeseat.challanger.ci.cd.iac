@@ -17,6 +17,7 @@ module "terraform_backend" {
 }
 
 #auth
+#auth - GUITHUB
 module "open_id_connect_github_action" {
   source         = "../../modules/authentication/aws/open.id.connect"
   url            = "https://token.actions.githubusercontent.com"
@@ -49,6 +50,7 @@ data "aws_iam_policy_document" "policy_document_terraform" {
   }
 }
 
+#auth - TERRAFORM
 module "role_terraform" {
   source             = "../../modules/authentication/aws/aws.iam.role"
   name               = "terraform.role"
