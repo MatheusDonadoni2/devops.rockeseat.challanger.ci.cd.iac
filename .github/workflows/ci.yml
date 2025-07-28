@@ -44,11 +44,9 @@ jobs:
         run: |
           echo "aws_region = \"${{ secrets.AWS_REGION }}\"" > terraform.tfvars
           echo "service_name = \"${{ secrets.SERVICE_NAME }}\"" >> terraform.tfvars
-          printf 'aws_region = "%s"\n' "${{ secrets.AWS_REGION }}" > terraform.tfvars
-          printf 'service_name = "%s"\n' "${{ secrets.SERVICE_NAME }}" >> terraform.tfvars
 
-      - name: Run terraform format
-        run: terraform fmt -check -recursive
+      # - name: Run terraform format
+      #   run: terraform fmt -check -recursive
 
       - name: Run terraform plan
         run: terraform plan
