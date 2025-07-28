@@ -42,8 +42,8 @@ jobs:
 
       - name: Create tfvars file
         run: |
-          echo "aws_region = \"${{ secrets.AWS_REGION }}\"" > environments/${{ github.ref_name }}/terraform.tfvars
-          echo "service_name = \"${{ secrets.SERVICE_NAME }}\"" >> environments/${{ github.ref_name }}/terraform.tfvars
+          echo "aws_region = \"${{ secrets.AWS_REGION }}\"" > terraform.tfvars
+          echo "service_name = \"${{ secrets.SERVICE_NAME }}\"" >> terraform.tfvars
           cat terraform.tfvars
 
       - name: Run terraform format

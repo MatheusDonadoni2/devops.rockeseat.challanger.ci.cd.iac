@@ -1,10 +1,10 @@
 variable "name" {
-  type =  string
+  type        = string
   description = "Container registry name"
 }
 
 variable "tags" {
-  type =  map(string)
-  default = {}
+  type        = map(string)
+  default     = {}
   description = "Creation tags"
 }
