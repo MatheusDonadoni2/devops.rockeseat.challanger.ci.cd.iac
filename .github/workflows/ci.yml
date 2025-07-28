@@ -47,7 +47,7 @@ jobs:
           cat terraform.tfvars
 
       - name: Run terraform format
-        run: terraform fmt -check
+        run: terraform fmt -check -recursive
 
       - name: Run terraform plan
         run: terraform plan
